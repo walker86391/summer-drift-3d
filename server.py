@@ -243,6 +243,16 @@ class AppHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps(persona).encode("utf-8"))
+        elif self.path == "/api/save-video":
+            content_length = int(self.headers.get("Content-Length", 0))
+            video_bytes = self.rfile.read(content_length)
+            with open("gameplay-test-10s.webm", "wb") as f:
+                f.write(video_bytes)
+            print(f"[API] Saved gameplay video: {len(video_bytes)} bytes")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(b'{"status":"saved"}')
         else:
             self.send_response(404)
             self.end_headers()
