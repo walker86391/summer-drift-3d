@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>SUMMER DRIFT // 3D Desert Island Racing Portfolio</title>
+  <meta name="description" content="Drive a 3D convertible through an interactive summer desert island portfolio with top-down following camera, beach physics, and customizable about section.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏖️</text></svg>">
+  <link rel="stylesheet" href="css/game.css">
+  <!-- Three.js r128 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- WebGL 3D Canvas -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- ====================================================================
+       TOP BAR HUD
+       ==================================================================== -->
+  <header class="top-hud">
+    <div class="hud-left">
+      <div class="brand-badge">
+        <span class="pulse-dot"></span>
+        <span class="brand-title">SUMMER DRIFT // 3D</span>
+      </div>
+      <div class="driver-pill">
+        <span>🏎️ </span><span id="hud-driver-name">Alex Rivera</span>
+      </div>
+    </div>
+
+    <div class="hud-center">
+      <div class="teleport-select-wrap">
+        <label for="teleport-select">Teleport:</label>
+        <select id="teleport-select" class="teleport-select">
+          <option value="">Jump to Station...</option>
+          <option value="about">01: About Me (Cabana)</option>
+          <option value="projects">02: Projects (Marina)</option>
+          <option value="skills">03: Skills (Coconut Grove)</option>
+          <option value="socials">04: Socials (Surf Shack)</option>
+          <option value="vibe">05: Tiki Radio Bar</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <button id="btn-audio-toggle" class="hud-btn icon-only" title="Toggle Sound">
+        <span>🔊</span>
+      </button>
+      <button id="btn-reset-car" class="hud-btn" title="Reset Car Position (R)">
+        <span>↺</span>
+        <span>Reset</span>
+      </button>
+      <button id="btn-open-customizer" class="hud-btn primary" title="Edit About & Car">
+        <span>⚡</span>
+        <span>Edit Portfolio</span>
+      </button>
+      <button id="btn-deploy-embarko" class="hud-btn" title="Deploy with Embarko">
+        <span>🚀</span>
+        <span>Deploy</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       RADAR / MINIMAP (TOP RIGHT)
+       ==================================================================== -->
+  <div class="minimap-container">
+    <canvas id="minimap-canvas" width="140" height="140"></canvas>
+    <div class="minimap-label">ISLAND // RADAR</div>
+  </div>
+
+  <!-- ====================================================================
+       ZONE PROXIMITY BANNER (CENTER TOP NOTIFICATION)
+       ==================================================================== -->
+  <div id="zone-banner" class="zone-proximity-banner">
+    <span id="zone-banner-icon" class="zone-icon">🏖️</span>
+    <div class="zone-text">
+      <span id="zone-banner-title" class="zone-title">ABOUT // CABANA</span>
+      <span id="zone-banner-sub" class="zone-subtitle">Press E or Tap to Open</span>
+    </div>
+    <button id="zone-open-btn" class="zone-open-btn">OPEN CARD</button>
+  </div>
+
+  <!-- ====================================================================
+       SPEEDOMETER & GAUGES (BOTTOM CENTER)
+       ==================================================================== -->
+  <div class="speedometer-container">
+    <div class="gear-badge">
+      <span class="gear-label">GEAR</span>
+      <span id="hud-gear-val" class="gear-val">N</span>
+    </div>
+
+    <div class="speedo-dial">
+      <span id="hud-speed-val" class="speedo-num">0</span>
+      <span class="speedo-unit">MPH // SPEED</span>
+    </div>
+
+    <div class="skills-counter">
+      <span class="skills-label">COCONUTS</span>
+      <span id="hud-skills-val" class="skills-val">0/6</span>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       DESKTOP CONTROLS HINT (BOTTOM LEFT)
+       ==================================================================== -->
+  <div class="controls-hint">
+    <div><span class="key-badge">W</span><span class="key-badge">S</span> Drive</div>
+    <div><span class="key-badge">A</span><span class="key-badge">D</span> Steer</div>
+    <div><span class="key-badge">SPACE</span> Drift</div>
+    <div><span class="key-badge">R</span> Reset</div>
+    <div><span class="key-badge">E</span> Inspect</div>
+  </div>
+
+  <!-- ====================================================================
+       MOBILE TOUCH CONTROLS (JUDGE READY FOR PHONES)
+       ==================================================================== -->
+  <div class="mobile-controls-wrap">
+    <!-- Left Hand: Steering -->
+    <div class="touch-cluster-left">
+      <div id="touch-left" class="touch-btn" aria-label="Steer Left">◀</div>
+      <div id="touch-right" class="touch-btn" aria-label="Steer Right">▶</div>
+    </div>
+
+    <!-- Right Hand: Gas, Brake, Drift -->
+    <div class="touch-cluster-right">
+      <div id="touch-drift" class="touch-btn drift" aria-label="Drift">DRIFT</div>
+      <div id="touch-brake" class="touch-btn brake" aria-label="Brake">REV</div>
+      <div id="touch-gas" class="touch-btn gas" aria-label="Accelerate">GAS</div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       STATION MODAL DIALOG (WHEN VISITING CHECKPOINTS)
+       ==================================================================== -->
+  <div id="station-modal" class="station-modal-backdrop">
+    <div class="station-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span id="modal-station-tag" class="modal-tag">CABANA 01</span>
+          <h2 id="modal-station-title" class="modal-title">Station Title</h2>
+        </div>
+        <button id="btn-close-modal" class="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+
+      <div id="modal-station-body" class="modal-body">
+        <!-- Dynamically rendered content -->
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn-modal-edit" class="hud-btn primary">
+          <span>✎</span>
+          <span>Edit Section in Studio</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       PORTFOLIO & CAR CUSTOMIZER DRAWER (SLIDE-OVER)
+       ==================================================================== -->
+  <aside id="customizer-drawer" class="customizer-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title">
+        <span>⚡</span>
+        <span>Portfolio & Car Studio</span>
+      </h3>
+      <button id="btn-close-customizer" class="modal-close-btn" aria-label="Close Studio">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- AI GitHub Quick-Fill -->
+      <div class="ai-import-box">
+        <span class="section-label">✦ GitHub AI Quick-Fill</span>
+        <div class="ai-input-row">
+          <input id="input-ai-handle" type="text" class="form-input" placeholder="e.g. torvalds or username">
+          <button id="btn-ai-scrape" class="hud-btn primary">Import</button>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
+          Scrapes public GitHub repos, avatar, and bio to auto-populate your summer island world.
+        </p>
+      </div>
+
+      <!-- About & Profile Section -->
+      <div class="editor-section-card">
+        <div class="section-head">
+          <span class="section-label">Identity & About Section</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-name">Full Name / Alias</label>
+          <input id="input-name" type="text" class="form-input" placeholder="Your Name">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-tagline">Title / Role</label>
+          <input id="input-tagline" type="text" class="form-input" placeholder="Creative Technologist // Engineer">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-bio">About Me Bio</label>
+          <textarea id="input-bio" class="form-textarea" placeholder="Tell the world about your craft, philosophy, and engineering work..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-location">Location / Timezone</label>
+          <input id="input-location" type="text" class="form-input" placeholder="California / Tropical Coast">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-avatar">Avatar URL</label>
+          <input id="input-avatar" type="text" class="form-input" placeholder="https://...">
+        </div>
+      </div>
+
+      <!-- Car Customizer Section -->
+      <div class="editor-section-card">
+        <div class="section-head">
+          <span class="section-label">Car Paint</span>
+        </div>
+
+        <div class="color-swatches-row">
+          <button class="color-swatch-btn active" data-color="#ff6b6b" style="background: #ff6b6b;" title="Coral Red"></button>
+          <button class="color-swatch-btn" data-color="#00b4d8" style="background: #00b4d8;" title="Ocean Turquoise"></button>
+          <button class="color-swatch-btn" data-color="#ffb703" style="background: #ffb703;" title="Sunny Gold"></button>
+          <button class="color-swatch-btn" data-color="#2a9d8f" style="background: #2a9d8f;" title="Palm Green"></button>
+          <button class="color-swatch-btn" data-color="#7209b7" style="background: #7209b7;" title="Sunset Purple"></button>
+          <button class="color-swatch-btn" data-color="#ffffff" style="background: #ffffff;" title="Pure Pearl White"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button id="btn-save-profile" class="hud-btn primary" style="flex: 1; justify-content: center; padding: 12px;">
+        <span>✓</span>
+        <span>Save & Update 3D World</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/editor.js"></script>
+
+  <script>
+    // Bootstrapping
+    window.addEventListener("DOMContentLoaded", () => {
+      const game = new CyberRacingEngine();
+      game.init();
+
+      const portfolio = new PortfolioManager(game);
+      window.portfolio = portfolio;
+      window.game = game;
+
+      console.log("[App] CYBER DRIFT 3D Racing Portfolio loaded successfully.");
+    });
+  </script>
+</body>
+</html>

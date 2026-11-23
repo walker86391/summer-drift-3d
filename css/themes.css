@@ -1,0 +1,244 @@
+/**
+ * MULTI-AESTHETIC STYLE ENGINE
+ * Defines visual tokens, typography, borders, and lighting for 10 distinct design movements.
+ */
+
+/* ==========================================================================
+   1. CYBERPUNK & SCI-FI HUD (Terminal / Glitchcore)
+   ========================================================================== */
+[data-theme="cyberpunk"] {
+  --bg-primary: #05070e;
+  --bg-secondary: #0b0f19;
+  --bg-card: rgba(11, 15, 25, 0.85);
+  --border-color: #00ff88;
+  --border-width: 1px;
+  --border-radius: 2px;
+  --accent-primary: #00ff88;
+  --accent-secondary: #00f0ff;
+  --accent-glow: 0 0 20px rgba(0, 255, 136, 0.4);
+  --text-primary: #e0f8eb;
+  --text-muted: #648a73;
+  --font-display: 'JetBrains Mono', monospace;
+  --font-body: 'JetBrains Mono', monospace;
+  --card-shadow: 0 0 15px rgba(0, 255, 136, 0.15), inset 0 0 15px rgba(0, 255, 136, 0.05);
+  --backdrop-blur: 8px;
+  --chip-bg: rgba(0, 255, 136, 0.1);
+  --btn-gradient: linear-gradient(90deg, #00ff88, #00f0ff);
+  --tag-border: 1px dashed #00ff88;
+}
+
+/* ==========================================================================
+   2. LIQUID CHROME & METALLIC (High Specular / Mercury)
+   ========================================================================== */
+[data-theme="liquid-chrome"] {
+  --bg-primary: #0a0a0c;
+  --bg-secondary: #141418;
+  --bg-card: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  --border-color: rgba(220, 230, 255, 0.4);
+  --border-width: 1px;
+  --border-radius: 24px;
+  --accent-primary: #e6ecf8;
+  --accent-secondary: #8ea4c8;
+  --accent-glow: 0 8px 32px rgba(200, 220, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-muted: #8b92a5;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  --backdrop-blur: 24px;
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --btn-gradient: linear-gradient(135deg, #f5f8ff 0%, #a2b2c8 50%, #465366 100%);
+  --tag-border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   3. Y2K & VAPORWAVE (Retro 2000s / Web 1.0 Gloss)
+   ========================================================================== */
+[data-theme="y2k"] {
+  --bg-primary: #19002e;
+  --bg-secondary: #280048;
+  --bg-card: rgba(45, 0, 75, 0.75);
+  --border-color: #ff007f;
+  --border-width: 2px;
+  --border-radius: 12px;
+  --accent-primary: #ff007f;
+  --accent-secondary: #00f0ff;
+  --accent-glow: 0 0 25px rgba(255, 0, 127, 0.5);
+  --text-primary: #ffffff;
+  --text-muted: #d090ff;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --card-shadow: 4px 4px 0px #00f0ff, 8px 8px 0px rgba(255, 0, 127, 0.4);
+  --backdrop-blur: 12px;
+  --chip-bg: rgba(255, 0, 127, 0.15);
+  --btn-gradient: linear-gradient(135deg, #ff007f, #7928ca);
+  --tag-border: 2px solid #00f0ff;
+}
+
+/* ==========================================================================
+   4. FRUTIGER AERO & LIQUID GLASS (Glossy Skeuomorphism)
+   ========================================================================== */
+[data-theme="frutiger-aero"] {
+  --bg-primary: #0f4c6e;
+  --bg-secondary: #1a6f99;
+  --bg-card: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 100%);
+  --border-color: rgba(255, 255, 255, 0.65);
+  --border-width: 1.5px;
+  --border-radius: 20px;
+  --accent-primary: #4ceb84;
+  --accent-secondary: #65d5ff;
+  --accent-glow: 0 10px 25px rgba(101, 213, 255, 0.35);
+  --text-primary: #ffffff;
+  --text-muted: #d6f2ff;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 0 15px 35px rgba(0, 40, 70, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  --backdrop-blur: 20px;
+  --chip-bg: rgba(255, 255, 255, 0.25);
+  --btn-gradient: linear-gradient(180deg, #62db87 0%, #1da347 100%);
+  --tag-border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   5. EXPERIMENTAL BRUTALISM & ANTI-DESIGN (Raw Neobrutalism)
+   ========================================================================== */
+[data-theme="brutalist"] {
+  --bg-primary: #f5f5f0;
+  --bg-secondary: #ebebe5;
+  --bg-card: #ffffff;
+  --border-color: #000000;
+  --border-width: 3px;
+  --border-radius: 0px;
+  --accent-primary: #ffeb3b;
+  --accent-secondary: #ff3366;
+  --accent-glow: none;
+  --text-primary: #000000;
+  --text-muted: #555555;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --card-shadow: 6px 6px 0px #000000;
+  --backdrop-blur: 0px;
+  --chip-bg: #ffeb3b;
+  --btn-gradient: #000000;
+  --tag-border: 2px solid #000000;
+}
+
+/* ==========================================================================
+   6. DARK LUXURY & NEO-EDITORIAL (High Fashion / Serif)
+   ========================================================================== */
+[data-theme="dark-luxury"] {
+  --bg-primary: #08080a;
+  --bg-secondary: #101014;
+  --bg-card: #121217;
+  --border-color: #38342c;
+  --border-width: 1px;
+  --border-radius: 4px;
+  --accent-primary: #dfb774;
+  --accent-secondary: #c49651;
+  --accent-glow: 0 4px 20px rgba(223, 183, 116, 0.15);
+  --text-primary: #f7f5f0;
+  --text-muted: #969185;
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  --backdrop-blur: 0px;
+  --chip-bg: #1c1a16;
+  --btn-gradient: linear-gradient(135deg, #dfb774 0%, #ab803d 100%);
+  --tag-border: 1px solid #dfb774;
+}
+
+/* ==========================================================================
+   7. BENTO UI & DATA-DENSE DASHBOARD (Structured Grids)
+   ========================================================================== */
+[data-theme="bento"] {
+  --bg-primary: #090a0f;
+  --bg-secondary: #12141c;
+  --bg-card: #141722;
+  --border-color: #262a3b;
+  --border-width: 1px;
+  --border-radius: 18px;
+  --accent-primary: #6366f1;
+  --accent-secondary: #38bdf8;
+  --accent-glow: 0 4px 20px rgba(99, 102, 241, 0.25);
+  --text-primary: #f8fafc;
+  --text-muted: #828ba0;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --backdrop-blur: 16px;
+  --chip-bg: #1e2232;
+  --btn-gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+  --tag-border: 1px solid #31364c;
+}
+
+/* ==========================================================================
+   8. GLASSMORPHISM & AURORA UI (Refractive Glass)
+   ========================================================================== */
+[data-theme="glassmorphism"] {
+  --bg-primary: #0a0518;
+  --bg-secondary: #140b2d;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.18);
+  --border-width: 1px;
+  --border-radius: 24px;
+  --accent-primary: #c084fc;
+  --accent-secondary: #38bdf8;
+  --accent-glow: 0 8px 30px rgba(192, 132, 252, 0.3);
+  --text-primary: #ffffff;
+  --text-muted: #a78bfa;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  --backdrop-blur: 28px;
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --btn-gradient: linear-gradient(135deg, #a855f7, #6366f1);
+  --tag-border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   9. NEUMORPHISM & CLAYMORPHISM (Tactile Inset/Drop Elevation)
+   ========================================================================== */
+[data-theme="neumorphism"] {
+  --bg-primary: #1e212b;
+  --bg-secondary: #1e212b;
+  --bg-card: #1e212b;
+  --border-color: transparent;
+  --border-width: 0px;
+  --border-radius: 28px;
+  --accent-primary: #ff7b90;
+  --accent-secondary: #70d6ff;
+  --accent-glow: none;
+  --text-primary: #e6e8ec;
+  --text-muted: #8b92a2;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --card-shadow: 9px 9px 18px #13151b, -9px -9px 18px #292d3b;
+  --backdrop-blur: 0px;
+  --chip-bg: #1e212b;
+  --btn-gradient: #ff7b90;
+  --tag-border: none;
+}
+
+/* ==========================================================================
+   10. BAUHAUS & MEMPHIS (Primary Geometric Color Blocks)
+   ========================================================================== */
+[data-theme="bauhaus"] {
+  --bg-primary: #f2ece1;
+  --bg-secondary: #e6dfd1;
+  --bg-card: #ffffff;
+  --border-color: #121212;
+  --border-width: 2.5px;
+  --border-radius: 0px;
+  --accent-primary: #d62828;
+  --accent-secondary: #003049;
+  --accent-glow: none;
+  --text-primary: #121212;
+  --text-muted: #495057;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --card-shadow: 6px 6px 0px #fdf0d5, 6px 6px 0px 2.5px #121212;
+  --backdrop-blur: 0px;
+  --chip-bg: #fcbf49;
+  --btn-gradient: #d62828;
+  --tag-border: 2px solid #121212;
+}
