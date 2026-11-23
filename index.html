@@ -114,22 +114,21 @@
   </div>
 
   <!-- ====================================================================
-       MOBILE TOUCH CONTROLS (JUDGE READY FOR PHONES)
+       DYNAMIC FLOATING JOYSTICK & TOUCH SYSTEM
+       - Below 35% from top: Tap anywhere to spawn dynamic joystick
+       - Above 35% from top: Swipe left/right to look around the island
+       - Disappears immediately when not touching
        ==================================================================== -->
-  <div class="mobile-controls-wrap">
-    <!-- Left Hand: Steering -->
-    <div class="touch-cluster-left">
-      <div id="touch-left" class="touch-btn" aria-label="Steer Left">◀</div>
-      <div id="touch-right" class="touch-btn" aria-label="Steer Right">▶</div>
-    </div>
-
-    <!-- Right Hand: Gas, Brake, Drift -->
-    <div class="touch-cluster-right">
-      <div id="touch-drift" class="touch-btn drift" aria-label="Drift">DRIFT</div>
-      <div id="touch-brake" class="touch-btn brake" aria-label="Brake">REV</div>
-      <div id="touch-gas" class="touch-btn gas" aria-label="Accelerate">GAS</div>
+  <div id="virtual-joystick" class="virtual-joystick">
+    <div class="joystick-base">
+      <div id="joystick-knob" class="joystick-knob"></div>
     </div>
   </div>
+
+  <!-- Manual Drift Pill (Floating bottom right for mobile) -->
+  <button id="touch-drift-btn" class="floating-drift-pill" aria-label="Hold to Drift">
+    <span>💨 DRIFT</span>
+  </button>
 
   <!-- ====================================================================
        STATION MODAL DIALOG (WHEN VISITING CHECKPOINTS)
