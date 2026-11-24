@@ -1,5 +1,7 @@
 # Summer Drift 3D // Island Racing Game Portfolio
 
+> 🌴 **Live Demo**: [https://walker86391.github.io/summer-drift-3d/](https://walker86391.github.io/summer-drift-3d/)
+
 An interactive 3D WebGL racing game portfolio built with Three.js, arcade drift physics, top-down following camera, and real-time portfolio customization.
 
 Inspired by Bruno Simon's iconic 3D portfolio, redesigned with a sunny desert island, beach cabanas, interactable props, and full mobile touch controls.
@@ -45,9 +47,10 @@ python server.py
 - **R**: Reset car position
 - **E / Enter**: Open active cabana card
 
-### Mobile
-- **Left Thumb**: Steer Left / Right
-- **Right Thumb**: Gas pedal, Brake pedal, and Drift button
+### Mobile & Touch
+- **Lower 65% of screen (below 35% from top)**: Tap and drag anywhere to spawn the dynamic virtual joystick (Up for gas, Down for reverse, Left/Right for steering).
+- **Upper 35% of screen**: Swipe horizontally to freely look and rotate camera around the car.
+- **Floating DRIFT Button**: Tap and hold the bottom-right pill button to trigger manual high-speed drifts.
 
 ## Built With
 - Three.js (r128)
